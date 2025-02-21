@@ -16,6 +16,12 @@ pipeline{
                 sh './jenkins/scripts/test.sh' 
             }
         }
+        stage('Manual Approval') {
+            agent any
+            steps {
+                input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed'
+            }
+        }
         stage('Deploy') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
